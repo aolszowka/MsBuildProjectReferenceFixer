@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="Program.cs" company="Ace Olszowka">
+// <copyright file="ProjectReferenceFixer.cs" company="Ace Olszowka">
 //  Copyright (c) Ace Olszowka 2018. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
