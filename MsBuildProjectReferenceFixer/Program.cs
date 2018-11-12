@@ -11,7 +11,6 @@ namespace MsBuildProjectReferenceFixer
     using System.IO;
     using System.Linq;
     using System.Text;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// Utility to Fix MsBuild ProjectRefence Tags when something is moved or
@@ -46,7 +45,7 @@ namespace MsBuildProjectReferenceFixer
 
                         if (Directory.Exists(directoryArgument))
                         {
-                            errorCode = VerifyProjectReferences(args[1]);
+                            errorCode = PrintToConsole(directoryArgument, false);
                         }
                         else
                         {
@@ -60,7 +59,7 @@ namespace MsBuildProjectReferenceFixer
                     if (Directory.Exists(command))
                     {
                         string targetPath = command;
-                        UpdateProjectReferences(targetPath);
+                        PrintToConsole(targetPath, true);
                         errorCode = 0;
                     }
                     else
@@ -97,7 +96,7 @@ namespace MsBuildProjectReferenceFixer
             return 21;
         }
 
-        static void UpdateProjectReferences(string targetDirectory)
+        static int PrintToConsole(string targetDirectory, bool fixProjects)
         {
             // Create our lookup Dictionary
             IDictionary<string, string> projectLookupDictionary = ProjectReferenceFixer.LoadProjectGuids(targetDirectory);
@@ -105,25 +104,18 @@ namespace MsBuildProjectReferenceFixer
             // Now Scan Each Project
             IEnumerable<string> projectsToFix = ProjectReferenceFixer.GetProjectsInDirectory(targetDirectory);
 
-            Parallel.ForEach(projectsToFix, projectToFix => ProjectReferenceFixer.UpdateProjectReferences(projectToFix, projectLookupDictionary, true));
-        }
+            string[] brokenProjects =
+                projectsToFix
+                .AsParallel()
+                .Where(projectToFix => ProjectReferenceFixer.UpdateProjectReferences(projectToFix, projectLookupDictionary, fixProjects))
+                .ToArray();
 
-        static int VerifyProjectReferences(string targetDirectory)
-        {
-            // Create our lookup Dictionary
-            IDictionary<string, string> projectLookupDictionary = ProjectReferenceFixer.LoadProjectGuids(targetDirectory);
-
-            // Now Scan Each Project
-            IEnumerable<string> projectsToFix = ProjectReferenceFixer.GetProjectsInDirectory(targetDirectory);
-
-            string[] modifiedProjects = projectsToFix.AsParallel().Where(projectToFix => ProjectReferenceFixer.UpdateProjectReferences(projectToFix, projectLookupDictionary, false)).ToArray();
-
-            foreach (string modifiedProject in modifiedProjects)
+            foreach (string brokenProject in brokenProjects)
             {
-                Console.WriteLine(modifiedProject);
+                Console.WriteLine(brokenProject);
             }
 
-            return modifiedProjects.Length;
+            return brokenProjects.Length;
         }
     }
 }

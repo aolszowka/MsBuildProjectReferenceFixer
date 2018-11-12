@@ -50,7 +50,7 @@ namespace MsBuildProjectReferenceFixer
             catch (Exception ex)
             {
                 string exception = $"Failed on project `{projectPath}`";
-                new InvalidOperationException(exception, ex);
+                throw new InvalidOperationException(exception, ex);
             }
 
             return projectModified;
@@ -94,7 +94,7 @@ namespace MsBuildProjectReferenceFixer
         /// <returns>All projects that this tool supports.</returns>
         internal static IEnumerable<string> GetProjectsInDirectory(string targetDirectory)
         {
-            HashSet<string> supportedFileExtensions = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase) { ".csproj", ".vbproj", ".synproj" };
+            HashSet<string> supportedFileExtensions = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase) { ".csproj", ".vbproj", ".synproj", ".fsproj" };
 
             return
                 Directory
