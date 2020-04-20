@@ -94,7 +94,14 @@ namespace MsBuildProjectReferenceFixer
         /// <returns>All projects that this tool supports.</returns>
         internal static IEnumerable<string> GetProjectsInDirectory(string targetDirectory)
         {
-            HashSet<string> supportedFileExtensions = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase) { ".csproj", ".vbproj", ".synproj", ".fsproj" };
+            HashSet<string> supportedFileExtensions =
+                new HashSet<string>(StringComparer.InvariantCultureIgnoreCase)
+                {
+                    ".csproj",
+                    ".fsproj",
+                    ".synproj",
+                    ".vbproj",
+                };
 
             return
                 Directory
