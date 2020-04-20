@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="ProjectReferenceFixer.cs" company="Ace Olszowka">
-//  Copyright (c) Ace Olszowka 2018. All rights reserved.
+//  Copyright (c) Ace Olszowka 2018-2020. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
@@ -99,6 +99,7 @@ namespace MsBuildProjectReferenceFixer
                 {
                     ".csproj",
                     ".fsproj",
+                    ".sqlproj",
                     ".synproj",
                     ".vbproj",
                 };
