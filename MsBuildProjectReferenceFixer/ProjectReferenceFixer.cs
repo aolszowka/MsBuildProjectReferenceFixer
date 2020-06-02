@@ -154,7 +154,7 @@ namespace MsBuildProjectReferenceFixer
             string prActualName = Path.GetFileNameWithoutExtension(dictionaryLookupProjectPath);
 
             // Get the existing name in the project reference
-            string prExistingName = MSBuildUtilities.GetProjectReferenceName(projectReference, projectPath);
+            string prExistingName = MSBuildUtilities.GetOrCreateProjectReferenceName(projectReference, projectPath);
             if (!prExistingName.Equals(prActualName))
             {
                 fragmentWasModified = true;
