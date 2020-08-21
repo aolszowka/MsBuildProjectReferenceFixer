@@ -30,18 +30,24 @@ This tool will make no attempt to fix any Solution Files. See the sister project
 
 ## Usage
 ```
-Usage: MsBuildProjectReferenceFixer.exe [validatedirectory] directory
+Usage: MsBuildProjectReferenceFixer C:\ProjectDirectory\ [-validate]
 
-Scans given directory for MsBuild Projects; Correcting their ProjectReference tags.
-Invalid Command/Arguments. Valid commands are:
+Scans given directory for MsBuild Projects; Correcting their ProjectReference
+tags.
 
-[directory]                   - [MODIFIES] Spins through the specified directory
-                                and all subdirectories for Project files cleans
-                                any invalid ProjectReference tags. ALWAYS Returns 0.
-validatedirectory [directory] - [READS] Spins through the specified directory
-                                and all subdirectories for Project files prints
-                                all paths that are NOT 'Valid'. Returns the
-                                number of invalid paths.
+This program will modify the specified Target Directory always returning an exit
+code of zero, regardless of how many projects were fixed.
+
+If you run this program with the validate argument, instead of modifying the
+projects, the exit code will be equal to the number of projects that would have
+been fixed.
+
+In all cases the program will print out the projects that needed to be fixed.
+
+               <>            The directory to spin though for Project Files
+      --validate             Indicates if this tool should only be run in 
+                               validation mode
+  -?, -h, --help             Show this message and exit
 ```
 
 ## Hacking
