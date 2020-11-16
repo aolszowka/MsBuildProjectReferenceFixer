@@ -124,7 +124,7 @@ namespace MsBuildProjectReferenceFixer
             bool fragmentWasModified = false;
 
             // The project directory needs the trailing slash to support relative path generation
-            string projectDirectory = PathUtilities.AddTrailingSlash(Path.GetDirectoryName(projectPath));
+            string projectDirectory = Path.GetDirectoryName(projectPath);
 
             string prIncludeRelativePath = MSBuildUtilities.GetProjectReferenceIncludeValue(projectReference, projectPath);
             string prGuid = MSBuildUtilities.GetProjectReferenceGUID(projectReference, projectPath);
@@ -133,16 +133,16 @@ namespace MsBuildProjectReferenceFixer
             string dictionaryLookupProjectPath = null;
             if (!projectLookupDictionary.TryGetValue(prGuid, out dictionaryLookupProjectPath))
             {
-                string prIncludeActualPath = PathUtilities.ResolveRelativePath(projectDirectory, prIncludeRelativePath);
+                string prIncludeActualPath = Path.GetFullPath(projectDirectory, prIncludeRelativePath);
                 string exception = $"Project GUID `{prGuid}` does not exist in the lookup dictionary; according to the project it should be located here `{prIncludeActualPath}`; was it deleted?";
                 throw new InvalidOperationException(exception);
             }
 
             // Now that we have the found path from the dictionary convert it to a relative path
-            string prActualRelativePath = PathUtilities.GetRelativePath(projectDirectory, dictionaryLookupProjectPath);
+            string prActualRelativePath = Path.GetRelativePath(dictionaryLookupProjectPath, projectDirectory);
 
             // Fix up the Relative Path to contain the correct slashes
-            prActualRelativePath = prActualRelativePath.Replace('/', '\\');
+            prActualRelativePath = prActualRelativePath.Replace(Path.DirectorySeparatorChar, '\\');
 
             if (!prIncludeRelativePath.Equals(prActualRelativePath))
             {

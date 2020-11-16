@@ -137,11 +137,8 @@ been fixed.
 In all cases the program will print out the projects that needed to be fixed.</value>
     <comment>Please Wrap this to 80 Characters. This is the description of this program when --help is ran</comment>
   </data>
-  <data name="ProgramName" xml:space="preserve">
-    <value>MsBuildProjectReferenceFixer</value>
-  </data>
   <data name="ShortUsageMessage" xml:space="preserve">
-    <value>Usage: MsBuildProjectReferenceFixer C:\ProjectDirectory\ [-validate]</value>
+    <value>Usage: C:\ProjectDirectory\ [-validate]</value>
   </data>
   <data name="TargetDirectoryDescription" xml:space="preserve">
     <value>The directory to spin though for Project Files</value>
