@@ -41,8 +41,8 @@ namespace MsBuildProjectReferenceFixer
             catch (OptionException)
             {
                 Console.WriteLine(Strings.ShortUsageMessage);
-                Console.WriteLine($"Try `{Strings.ProgramName} --help` for more information.");
-                Environment.ExitCode = 21;
+                Console.WriteLine($"Try `--help` for more information.");
+                Environment.ExitCode = 160;
                 return;
             }
 
@@ -78,7 +78,7 @@ namespace MsBuildProjectReferenceFixer
             Console.WriteLine();
             Console.WriteLine($"               <>            {Strings.TargetDirectoryDescription}");
             p.WriteOptionDescriptions(Console.Out);
-            return 21;
+            return 160;
         }
 
         static int PrintToConsole(string targetDirectory, bool fixProjects)
