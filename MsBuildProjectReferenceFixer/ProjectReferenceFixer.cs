@@ -139,7 +139,7 @@ namespace MsBuildProjectReferenceFixer
             }
 
             // Now that we have the found path from the dictionary convert it to a relative path
-            string prActualRelativePath = Path.GetRelativePath(dictionaryLookupProjectPath, projectDirectory);
+            string prActualRelativePath = Path.GetRelativePath(projectDirectory, dictionaryLookupProjectPath);
 
             // Fix up the Relative Path to contain the correct slashes
             prActualRelativePath = prActualRelativePath.Replace(Path.DirectorySeparatorChar, '\\');
