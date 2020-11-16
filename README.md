@@ -1,4 +1,6 @@
 # MsBuildProjectReferenceFixer
+![CI - Master](https://github.com/aolszowka/MsBuildProjectReferenceFixer/workflows/CI/badge.svg?branch=master)
+
 Utility for Fixing Project References in MSBuild Project System Files.
 
 ## When To Use This Tool
@@ -29,8 +31,15 @@ This tool will:
 This tool will make no attempt to fix any Solution Files. See the sister project https://github.com/aolszowka/VisualStudioSolutionFixer for a way to fix those.
 
 ## Usage
+There are now two ways to run this tool:
+
+1. (Compiled Executable) Invoke the tool via `MsBuildProjectReferenceFixer` and pass the arguments.
+2. (Dotnet Tool) Install this tool using the following command `dotnet tool install MsBuildProjectReferenceFixer` (assuming that you have the nuget package in your feed) then invoke it via `dotnet project-fixprojectreferences`
+
+In both cases the flags to the tooling are identical:
+
 ```
-Usage: MsBuildProjectReferenceFixer C:\ProjectDirectory\ [-validate]
+Usage: C:\ProjectDirectory\ [-validate]
 
 Scans given directory for MsBuild Projects; Correcting their ProjectReference
 tags.
@@ -45,15 +54,15 @@ been fixed.
 In all cases the program will print out the projects that needed to be fixed.
 
                <>            The directory to spin though for Project Files
-      --validate             Indicates if this tool should only be run in 
+      --validate             Indicates if this tool should only be run in
                                validation mode
   -?, -h, --help             Show this message and exit
 ```
 
 ## Hacking
-The most likely change you will want to make is changing the supported project files. In theory this tool should support any MSBuild Project Format that utilizes a ProjectGuid.
+The most likely change you will want to make is changing the supported project files. In theory this tool should support any MSBuild Project Format that utilizes a `ProjectGuid`.
 
-See MsBuildProjectReferenceFixer.GetProjectsInDirectory(string) for the place to modify this.
+See `MsBuildProjectReferenceFixer.GetProjectsInDirectory(string)` for the place to modify this.
 
 The tool should also support those projects that utilize the same ProjectReference format as CSPROJ formats.
 
