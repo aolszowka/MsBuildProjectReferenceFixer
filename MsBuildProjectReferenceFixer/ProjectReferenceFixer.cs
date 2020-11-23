@@ -133,7 +133,7 @@ namespace MsBuildProjectReferenceFixer
             string dictionaryLookupProjectPath = null;
             if (!projectLookupDictionary.TryGetValue(prGuid, out dictionaryLookupProjectPath))
             {
-                string prIncludeActualPath = Path.GetFullPath(projectDirectory, prIncludeRelativePath);
+                string prIncludeActualPath = Path.GetFullPath(prIncludeRelativePath, projectDirectory);
                 string exception = $"Project GUID `{prGuid}` does not exist in the lookup dictionary; according to the project it should be located here `{prIncludeActualPath}`; was it deleted?";
                 throw new InvalidOperationException(exception);
             }
