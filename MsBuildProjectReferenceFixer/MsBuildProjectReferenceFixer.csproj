@@ -16,7 +16,7 @@
     <PackAsTool>true</PackAsTool>
     <RepositoryUrl>https://github.com/aolszowka/MsBuildProjectReferenceFixer</RepositoryUrl>
     <ToolCommandName>project-fixprojectreferences</ToolCommandName>
-    <VersionPrefix>3.0.1</VersionPrefix>
+    <VersionPrefix>3.0.2</VersionPrefix>
     <VersionSuffix>$(VersionSuffix)</VersionSuffix>
   </PropertyGroup>
   <PropertyGroup>
